@@ -3,6 +3,7 @@ const sendEmail = require("../services/sendEmail");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const moment = require('moment');
+const path = require('path');
 
 
 
@@ -132,7 +133,9 @@ const cofrimEmail = async(req, res)=>{
                     res.status(400).json({message:"You already confrimed Please procced to login Pages"});
                 } else {
                     await User.findOneAndUpdate({_id:user._id} , {confirm_email:true})
-                    res.status(200).json({message:"Done Please log In"});
+                    // res.status(200).json({message:"Done Please log In"});
+                    res.sendFile(path.join(__dirname, '../welcom.html'));
+
                 }
             }
         }
